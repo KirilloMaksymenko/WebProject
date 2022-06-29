@@ -1,0 +1,82 @@
+{% extends 'main/base.html'%}
+
+{% block title%}
+Account
+{% endblock %}
+
+{% block head%}
+<style>
+    .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+.form-signin input[type="password"] {
+
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-floating>.form-control {
+    padding: 1rem 0.75rem;
+}
+.form-floating>.form-control, .form-floating>.form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25;
+}
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+</style>
+{% endblock %}
+
+{% block content%}
+
+    <main class="form-signin">
+      <form method="post">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+
+        <div class="form-floating">
+
+            {{form.username}}
+<!--          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">-->
+          <label for="floatingInput">User name</label>
+        </div>
+          <div class="form-floating">
+              {{form.password}}
+<!--          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+          <label for="floatingPassword">Password</label>
+        </div>
+        <br>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+
+      </form>
+    </main>
+{% endblock %}

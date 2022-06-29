@@ -1,0 +1,333 @@
+{% extends 'main/base.html'%}
+
+{% block title%}
+Board
+{% endblock %}
+
+{% block head%}
+<link  href="http://fonts.googleapis.com/css?family=Neucha&subset=cyrillic" rel="stylesheet" type="text/css" >
+<style type="text/css">
+    .titel-notes{
+        font-size:150%;
+        font-weight:bold;
+        padding-bottom:10px;
+
+    }
+    .text-notes {
+        font-family:"Neucha",serif;
+        font-size:120%;
+
+
+    }
+
+    .coupon-view {
+        {% if post.color == 'red' %}
+            background-color: #EF9F6B;
+        {% endif %}
+
+        {% if post.color == 'yellow' %}
+            background-color:  #E3DA53;
+        {% endif %}
+        {% if post.color == 'blue' %}
+            background-color: #6BBEE5;
+        {% endif %}
+
+        {% if post.color == 'green' %}
+            background-color:  #8CE870;
+        {% endif %}
+       margin: 0 auto; /* Center the coupon */
+       max-width: 800px;
+       -o-transform:rotate(-3deg);
+       -webkit-transform:rotate(-3deg);
+       -moz-transform:rotate(-3deg);
+       position:relative;
+       top:5px;
+       /* Firefox */
+       -moz-box-shadow:10px 10px 12px rgba(33,33,33,1);
+       /* Safari+Chrome */
+       -webkit-box-shadow: 10px 10px 12px rgba(33,33,33,.7);
+       /* Opera */
+       box-shadow: 0px 0px 25px rgba(33,33,33,.7);
+    }
+    .coupon:hover, .coupon:focus{
+        -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+        box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        position:relative;
+        z-index:5;
+    }
+   .coupon {
+
+       margin: 0 auto; /* Center the coupon */
+       max-width: 800px;
+       -o-transform:rotate(-3deg);
+       -webkit-transform:rotate(-3deg);
+       -moz-transform:rotate(-3deg);
+       position:relative;
+       top:5px;
+
+       /* Firefox */
+       -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+       /* Safari+Chrome */
+       -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+       /* Opera */
+       box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+   }
+    .crap-img{
+        margin: 0 right;
+        width: 10%;
+        position: absolute;
+        right: -5px;
+        top: -7px;
+
+    }
+    .crap-img-view{
+        margin: 0 right;
+        width: 10%;
+        position: absolute;
+        right: -5px;
+        top: -7px;
+    }
+   .containers-title{
+    padding: 0px 16px;
+   }
+
+   .containers {
+        padding: 2px 16px;
+   }
+
+   .expire {
+       font-family:"Neucha",serif;
+       color: gray;
+       font-size:80%;
+   }
+    .view-place{
+
+        z-index: 100;
+        position: fixed;
+        bottom: 35px;
+        right:20px;
+        width:300px;
+
+    }
+    .background-create{
+        opacity: 0.3;
+        width: 100%;
+
+        background: #000000;
+        margin: 0 auto;
+    }
+
+    .view-containers-title{
+    padding: 10px 16px;
+   }
+   .view-title{
+        {% if post.color == 'red' %}
+            background-color: #EF9F6B;
+        {% endif %}
+
+        {% if post.color == 'yellow' %}
+            background-color:  #E3DA53;
+        {% endif %}
+        {% if post.color == 'blue' %}
+            background-color: #6BBEE5;
+        {% endif %}
+
+        {% if post.color == 'green' %}
+            background-color:  #8CE870;
+        {% endif %}
+
+        outline: 0;
+        border: 0px solid black;
+        margin: 0 auto;
+        font-size:150%;
+        font-weight:bold;
+        width:250px;
+   }
+   .view-notes{
+        {% if post.color == 'red' %}
+            background-color: #EF9F6B;
+        {% endif %}
+
+        {% if post.color == 'yellow' %}
+            background-color:  #E3DA53;
+        {% endif %}
+        {% if post.color == 'blue' %}
+            background-color: #6BBEE5;
+        {% endif %}
+
+        {% if post.color == 'green' %}
+            background-color:  #8CE870;
+        {% endif %}
+
+        resize: none;
+        max-height: 250px;
+        outline: 0;
+        border: 0px solid black;
+        font-family:"Neucha",serif;
+        font-size:120%;
+
+        width:250px;
+   }
+
+    textarea::-webkit-scrollbar {
+        width: 0.5em;
+
+    }
+
+    textarea::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
+
+   .view-containers {
+        padding: 2px 16px;
+   }
+   .add-img{
+        margin: 0 right;
+        width: 55px;
+        position: fixed;
+        right: 30px;
+        bottom: 25px;
+   }
+   .add-img:hover, .add-img:focus{
+        -webkit-transform: scale(1.1);
+   }
+   .reaction-img{
+        width: 10px;
+        height: 10px;
+        margin-right: 1px;
+        margin-bottom: 1px;
+   }
+   .btn-reactions{
+        {% if post.color == 'red' %}
+            background-color: #EF9F6B;
+        {% endif %}
+
+        {% if post.color == 'yellow' %}
+            background-color:  #E3DA53;
+        {% endif %}
+        {% if post.color == 'blue' %}
+            background-color: #6BBEE5;
+        {% endif %}
+
+        {% if post.color == 'green' %}
+            background-color:  #8CE870;
+        {% endif %}
+
+        float: right;
+        margin-bottom: 4px;
+        outline: 0;
+        border: 0px solid black;
+        font-family:"Neucha",serif;
+        width: 20px;
+   }
+</style>
+
+{% endblock %}
+
+{% block content%}
+    <h4>Questions</h4>
+    <a href="{% url 'server-create'%}"><img  class="add-img"  src="https://i.imgur.com/Cazmill.png"></a>
+
+
+    {% if list_notes %}
+
+    {% for el in list_notes %}
+        <div class="column">
+            <div class="coupon" style="{% if el.color == 'red' %}
+                                            background-color: #EF9F6B;
+                                        {% endif %}
+
+                                        {% if el.color == 'yellow' %}
+                                            background-color:  #E3DA53;
+                                        {% endif %}
+                                        {% if el.color == 'blue' %}
+                                            background-color: #6BBEE5;
+                                        {% endif %}
+
+                                        {% if el.color == 'green' %}
+                                            background-color:  #8CE870;
+                                        {% endif %}">
+                <img class="crap-img" src="https://i.imgur.com/kX19d4S.png">
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'server-views-notes' el.id%}">
+                  <div class="containers-title" >
+
+                      <h4 class="titel-notes">{{ el.title}}</h4>
+
+                  </div>
+
+                  <div class="containers">
+                    <p class="text-notes">{{ el.task}}</p>
+                    <p class="expire">
+                        {{ el.author }}
+                        {{ el.time_create }}
+                        <img class="reaction-img" src="https://i.imgur.com/fgAIs12.png">
+                        {{el.reaction_count_in_post.count}}
+                    </p>
+
+
+
+
+                  </div>
+
+                </a>
+
+            </div>
+        </div>
+
+    {% endfor %}
+    {% else %}
+        <p> We don`t have notes </p>
+    {% endif %}
+
+    <div class="view-place">
+
+            <div class="coupon-view">
+                {% if request.user == post.author%}
+                    <a href="{% url 'server-delete-notes' post.id%}"><img class="crap-img-view" src="https://i.imgur.com/kX19d4S.png" ></a>
+                {% else %}
+                    <a href="#"><img class="crap-img-view" src="https://i.imgur.com/kX19d4S.png" ></a>
+                {% endif %}
+                    <div class="view-containers-title" >
+                        <div class="view-title">
+                            {{post.title}}
+                        </div>
+                    </div>
+                    <div class="view-containers">
+
+                        <textarea class="view-notes"  rows="9" id="id_task" readonly>{{post.task}}</textarea>
+                        <div class="expire">
+                            {% if request.user == post.author%}
+
+                                {% else %}
+                                    {% for el in users %}
+
+                                        {% if el == post.author%}
+                                            <a href="{% url 'server-account-views' el.id%}">{{ post.author }}</a>
+                                        {% endif %}
+                                {% endfor %}
+
+                            {% endif %}
+                            {{post.time_create}}
+                            <form method="POST" action="{% url 'server-views-reactions' post.pk%}">
+                                {%csrf_token%}
+                                <button name="notes_id" value="{{post.id}}" type="submit" class="btn-reactions">
+                                    <img class="reaction-img" src="https://i.imgur.com/fgAIs12.png">
+                                    {{total_reactions}}
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                <br>
+            </div>
+        </div>
+{%endblock%}

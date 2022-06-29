@@ -1,0 +1,165 @@
+{% extends 'main/base.html'%}
+
+{% block title%}
+My Board
+{% endblock %}
+
+{% block head%}
+<link  href="http://fonts.googleapis.com/css?family=Neucha&subset=cyrillic" rel="stylesheet" type="text/css" >
+<style type="text/css">
+    .titel-notes{
+        font-size:150%;
+        font-weight:bold;
+        padding-bottom:10px;
+
+    }
+    .text-notes {
+        font-family:"Neucha",serif;
+        font-size:120%;
+
+
+    }
+   .coupon:hover, .coupon:focus{
+        -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+        box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        position:relative;
+        z-index:5;
+
+   }
+
+   .coupon {
+       -o-transform:rotate(-3deg);
+       -webkit-transform:rotate(-3deg);
+       -moz-transform:rotate(-3deg);
+       position:relative;
+       top:5px;
+
+       margin: 0 auto; /* Center the coupon */
+       max-width: 800px;
+
+       /* Firefox */
+       -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+       /* Safari+Chrome */
+       -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+       /* Opera */
+       box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+   }
+   .add-img{
+        margin: 0 right;
+        width: 55px;
+        position: fixed;
+        right: 30px;
+        bottom: 25px;
+   }
+   .add-img:hover, .add-img:focus{
+        -webkit-transform: scale(1.1);
+   }
+    .crap-img{
+        margin: 0 right;
+        width: 10%;
+        position: absolute;
+        right: -5px;
+        top: -7px;
+
+    }
+
+   .containers-title{
+    padding: 0px 16px;
+   }
+
+   .containers {
+        padding: 2px 16px;
+   }
+
+   .expire {
+       font-family:"Neucha",serif;
+       color: gray;
+       font-size:80%;
+   }
+
+
+</style>
+
+{% endblock %}
+
+{% block content%}
+
+    <h4>Questions</h4>
+    <a href="{% url 'create'%}"><img  class="add-img"  src="https://i.imgur.com/Cazmill.png"></a>
+
+
+    {% if tasks %}
+
+    {% for el in tasks %}
+        {% if request.user == el.author%}
+        <div class="column">
+            <div class="coupon" style="{% if el.color == 'red' %}
+                                            background-color: #EF9F6B;
+                                        {% endif %}
+
+                                        {% if el.color == 'yellow' %}
+                                            background-color:  #E3DA53;
+                                        {% endif %}
+                                        {% if el.color == 'blue' %}
+                                            background-color: #6BBEE5;
+                                        {% endif %}
+
+                                        {% if el.color == 'green' %}
+                                            background-color:  #8CE870;
+                                        {% endif %}">
+                <img class="crap-img" src="https://i.imgur.com/kX19d4S.png">
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'views-notes' el.id%}">
+                  <div class="containers-title" >
+
+                      <h4 class="titel-notes">{{ el.title}}</h4>
+
+                  </div>
+
+                  <div class="containers">
+                    <p class="text-notes">{{ el.task}}</p>
+                    <p class="expire">{{ el.time_create }}</p>
+
+                  </div>
+
+                </a>
+            </div>
+        </div>
+        {% else %}
+
+        {% endif %}
+    {% endfor %}
+    {% else %}
+        <p> We don`t have notes </p>
+    {% endif %}
+{%endblock%}
+
+<!-- <div class="alert alert-warning mt-2">-->
+<!--            <h3>{{ el.title}}</h3>-->
+<!--            <span>{{ el.task}}</span>-->
+<!--        </div>-->
+
+<!--Colors:-->
+<!--1. #D28757, #EF9F6B red-->
+<!--2. #D1C846, #E3DA53 yellow-->
+<!--3. #57A3C6 , #6BBEE5 blue-->
+<!--4. #62B34B, #8CE870 green-->
+
+<!--Titles color-->
+<!--style="{% if el.color == 'red' %}-->
+<!--    background-color: #D28757;-->
+<!--{% endif %}-->
+
+<!--{% if el.color == 'yellow' %}-->
+<!--    background-color: #D1C846;-->
+<!--{% endif %}-->
+<!--{% if el.color == 'blue' %}-->
+<!--    background-color: #57A3C6;-->
+<!--{% endif %}-->
+
+<!--{% if el.color == 'green' %}-->
+<!--    background-color: #62B34B;-->
+<!--{% endif %}"-->
